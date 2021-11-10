@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#conteudo{
+    width: 100%;
+    overflow: hidden;
+}
+
+#tabela{
+    width: 400px;
+    float: left;
+}
