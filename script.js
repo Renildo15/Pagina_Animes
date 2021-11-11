@@ -9,7 +9,10 @@ var animes =[
 
       score: 8.63,
 
-      start_date: "2006-10-04T00:00:00+00:00",
+      start_date: new Date("2006-10-04T00:00:00+00:00"),
+      data: function (){
+          return this.start_date.getFullYear()  + "-" + this.start_date.getMonth() + "-" + this.start_date.getDay();
+      }
 
     },
 
@@ -23,8 +26,10 @@ var animes =[
 
       score: 8.18,
 
-      start_date: "2015-01-10T00:00:00+00:00",
-
+      start_date: new Date("2015-01-10T00:00:00+00:00"),
+      data: function (){
+          return this.start_date.getFullYear() + "-" + this.start_date.getMonth() + "-" + this.start_date.getDay();
+      }
     },
 
     {
@@ -37,14 +42,26 @@ var animes =[
 
       score: 7.91,
 
-      start_date: "2013-03-02T00:00:00+00:00",
+      start_date: new Date("2013-03-02T00:00:00+00:00"),
+
+      data: function (){
+          return this.start_date.getFullYear() + "-" + this.start_date.getMonth() + "-" + this.start_date.getDay();
+      }
 
     }
 
 ]
 
 function tabelaAnimes(){
-    return animes.map(f => `<div>${f.title} - ${f.start_date} - <a href="#" onclick="carregarImagem(event,'${f.image_url}')">Carregar</a> </div>`)
+    return animes.map(f => `
+    <tr>
+    <td><a href = "${f.url}" target = _blank>${f.title}</a></td>
+    <td>${f.data()}</td>
+    <td><button><a href="#" onclick="carregarImagem(event,'${f.image_url}')">Carregar</a></button></td>
+    <td>${f.score}</td>
+    </tr>`).join('');
+
+    /*return animes.map(f => `<div> <a href = "${f.url}" target = _blank>${f.title}</a> - ${f.data()} - ${f.score} - <a href="#" onclick="carregarImagem(event,'${f.image_url}')">Carregar</a> </div>`)*/
 } 
 
 const carregarImagem = (event, url) => {
@@ -52,4 +69,6 @@ const carregarImagem = (event, url) => {
     document.getElementById("imagem").innerHTML = `<img src="${url}"  width="200px"/>`
 
 }
- document.getElementById("tabela").innerHTML = `Titulo - Ano - Imagem<br/> ${tabelaAnimes().join('\n')}`;
+ document.getElementById("conteudo").innerHTML = tabelaAnimes();
+
+ /*`Titulo - Ano - Imagem - Score<br/> ${tabelaAnimes().join('\n')}`*/
